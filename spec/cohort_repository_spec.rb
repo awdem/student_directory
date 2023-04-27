@@ -29,5 +29,49 @@ RSpec.describe CohortRepository do
       expect(cohort_3.cohort_name).to eq "October"
       expect(cohort_3.starting_date).to eq "2023-10-13"
     end
+  end  
+
+  describe '#find_by_id' do
+    it 'returns a cohort object by id' do
+      repo = CohortRepository.new
+
+      cohort_2 = repo.find_by_id(2)
+
+      expect(cohort_2.id).to eq "2"
+      expect(cohort_2.cohort_name).to eq "January"
+      expect(cohort_2.starting_date).to eq "2023-01-13"
+      
+    end
   end
+      
+  describe '#find_with_students' do
+   it "returns a cohort object with students" do
+    repo = CohortRepository.new
+
+    cohort_with_students = repo.find_with_students(1)
+    
+    expect(cohort_with_students.id).to eq "1"
+    expect(cohort_with_students.cohort_name).to eq "April"
+    expect(cohort_with_students.starting_date).to eq "2023-04-13"
+
+    students = cohort_with_students.students
+    
+    expect(students.length).to eq 2
+
+    first_student = cohort_with_students.students.first 
+
+    expect(first_student.id).to eq '1'
+    expect(first_student.student_name).to eq 'David'
+    expect(first_student.cohort_id).to eq '1'
+   
+    second_student = cohort_with_students.students.last
+   
+    expect(second_student.id).to eq '2'
+    expect(second_student.student_name).to eq 'Emma'
+    expect(second_student.cohort_id).to eq '1'
+   end 
+  end
+  
 end
+
+
