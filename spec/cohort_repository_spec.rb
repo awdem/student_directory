@@ -12,5 +12,5 @@ RSpec.describe CohortRepository do
     reset_test_tables
   end  
 
-  
+    
 end
