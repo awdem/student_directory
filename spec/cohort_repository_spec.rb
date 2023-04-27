@@ -71,6 +71,26 @@ RSpec.describe CohortRepository do
     expect(second_student.cohort_id).to eq '1'
    end 
   end
+
+  describe "#create" do
+    it "creates a new cohort" do
+      cohort = Cohort.new
+      cohort.cohort_name = "new_cohort"
+      cohort.starting_date = "2023-05-01"
+
+      repo = CohortRepository.new
+
+      repo.create(cohort)
+
+      cohort_records = repo.all
+
+      new_cohort = cohort_records.last
+
+      expect(new_cohort.id).to eq "4"
+      expect(new_cohort.cohort_name).to eq "new_cohort"
+      expect(new_cohort.starting_date).to eq "2023-05-01"
+    end
+  end
   
 end
 

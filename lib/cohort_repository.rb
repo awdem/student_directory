@@ -57,8 +57,14 @@ class CohortRepository
     cohort
   end  
 
-  def create
+  def create(cohort)
+    sql = "INSERT INTO cohorts
+            (cohort_name, starting_date)
+            VALUES ($1, $2);"
 
+    params = [cohort.cohort_name, cohort.starting_date]
+
+    DatabaseConnection.exec_params(sql, params)
   end
 
   def delete
