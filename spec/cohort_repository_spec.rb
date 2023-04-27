@@ -91,7 +91,19 @@ RSpec.describe CohortRepository do
       expect(new_cohort.starting_date).to eq "2023-05-01"
     end
   end
-  
+
+  describe "#delete" do
+    it "deletes a cohort record" do
+      repo = CohortRepository.new
+      repo.delete(1)
+
+      records = repo.all
+
+      expect(records.length).to eq 2
+
+      expect(records.first.id).to eq "2"
+    end
+  end
 end
 
 

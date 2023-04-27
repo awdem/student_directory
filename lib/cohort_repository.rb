@@ -67,8 +67,8 @@ class CohortRepository
     DatabaseConnection.exec_params(sql, params)
   end
 
-  def delete
-
+  def delete(id)
+    sql = "DELETE FROM cohorts WHERE id = $1;"
+    DatabaseConnection.exec_params(sql, [id])
   end
-
 end
